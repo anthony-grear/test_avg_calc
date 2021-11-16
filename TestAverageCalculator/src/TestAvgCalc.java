@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class TestAvgCalc {
 	
@@ -19,6 +20,17 @@ public class TestAvgCalc {
 	}
 	
 	public static void main (String [] args) {
-		TestAvgCalc.specs();
+		double score=0;
+//		TestAvgCalc.specs();
+		while (score!=999) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter a score:");
+			score = sc.nextDouble();
+			if (score == 999) {
+				System.out.println("Program terminated.");
+				break;
+			}
+			System.out.println(score);
+		};
 	}
 }
