@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class TestAvgCalc {
 	
@@ -16,32 +15,33 @@ public class TestAvgCalc {
 				+ "\u2022 C = 70-79\r\n"
 				+ "\u2022 D = 60-69\r\n"
 				+ "\u2022 F = 0-59";
-		
+		System.out.println("Anthony Grear, CS 115 Final Assignment, Test Average Calculator\n");
 		System.out.println(spec1+spec2+spec3+spec4+spec5+spec6+spec7);
 	}
 	
 	public static void main (String [] args) {
 		double score=0;                       //each test grade
 		double total=0;                       //sum of all entered grades
+		double average=0;                     //average of grades entered
+		double averageFloor;                  //grade average rounded down to the tens place
+		int scoreFloor;                       //grade average rounded down to the tens place cast to an int
 		int count=0;                          //count of grades entered
-		int remaining=10;                        //count of grades to be entered  
+		int remaining=10;                     //count of grades to be entered 
+		char finalGrade;                      //final letter grade
 		double[] scores= new double[10];      //array of grades entered
-//		TestAvgCalc.specs();                  //calling the method to print specifications		
-		System.out.println("Welcome to Test Average Calculator.\n\nYou may enter up to 10 scores,\nor enter 999 at anytime to quit.\n\nPlease enter your first test grade:");
+		TestAvgCalc.specs();                  //calling the method to print specifications		
+		System.out.println("\nWelcome to Test Average Calculator.\n\nYou may enter up to 10 scores, or enter 999 at anytime to quit.\n\nPlease enter your first test grade:");
 		
 		Scanner sc = new Scanner(System.in);  //initialize an instance of the Scanner class
 		score = sc.nextDouble();              //call the nextDouble method to read the input 
 		
-		if (score!=999) {
+		if (score!=999) {                     //check if user has entered the first score, or wants to quit
 			scores[count] = score;
 			total=total+score;
 			count++;
 			remaining = 10 - count;
 		}
-		while (score!=999 & count<10) {
-			
-			
-			
+		while (score!=999 && count<10) {	 //prompt user to enter test scores until 999 or 10th score is entered		
 			System.out.println("\nYou have " + remaining + " scores remaining.\n\nPlease enter your next test grade or 999 to quit:");
 			score = sc.nextDouble();
 			if (score!=999) {
@@ -50,10 +50,32 @@ public class TestAvgCalc {
 				count++;
 				remaining = 10 - count;
 			}
-					
 		}
-		System.out.println("End of Program.");
-		System.out.println(Arrays.toString(scores));
+		
+		average = total/count;                       //calculate the average test score
+		averageFloor = Math.floor(average/10) * 10;  //round down the average to the tens place
+		scoreFloor = (int)(averageFloor);            //cast the double to int to use in following switch block
+		                                             
+		switch (scoreFloor) {                        //assign a letter grade for output
+		  case 90:
+			 finalGrade = 'A' ;
+			 break;
+		  case 80:
+			 finalGrade = 'B' ;
+			 break;
+		  case 70:
+			 finalGrade = 'C' ;
+			 break; 
+		  case 60:
+			 finalGrade = 'D' ;
+			 break;  
+		  default:
+			 finalGrade = 'F' ;
+			 break;			  
+		}
+		
+		
+		//loop through array and print scores
 		System.out.println("List of Test Grades");
 		System.out.println("---------------------");
 		for (int i = 0; i <10; i++ ) {
@@ -63,9 +85,13 @@ public class TestAvgCalc {
 			System.out.println("| Test grade "+(i+1)+": "+ scores[i]);
 		
 			}
-		}
-		System.out.println("---------------------");
+		}		
+		System.out.println("---------------------\n");
+		
+		//print the final output
 		System.out.println("Total: " + total);
-		System.out.println("Count: " + count);
+		System.out.println("Test Count: " + count);
+		System.out.println("Numerical Average: " + average);
+		System.out.println("Final Grade: " + finalGrade);
 	}
 }
