@@ -50,10 +50,21 @@ public class TestAvgCalc {
 				count++;
 				remaining = 10 - count;
 			}
-			
+					
 		}
 		System.out.println("End of Program.");
 		System.out.println(Arrays.toString(scores));
+		System.out.println("List of Test Grades");
+		System.out.println("---------------------");
+		for (int i = 0; i <10; i++ ) {
+			if (i <9) {
+				System.out.println("| Test grade "+(i+1)+":  "+ scores[i]);
+			} else {
+			System.out.println("| Test grade "+(i+1)+": "+ scores[i]);
+		
+			}
+		}
+		System.out.println("---------------------");
 		System.out.println("Total: " + total);
 		System.out.println("Count: " + count);
 	}
