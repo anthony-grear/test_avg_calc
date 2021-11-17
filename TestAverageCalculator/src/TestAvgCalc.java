@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class TestAvgCalc {
 	
@@ -20,17 +21,40 @@ public class TestAvgCalc {
 	}
 	
 	public static void main (String [] args) {
-		double score=0;
-//		TestAvgCalc.specs();
-		while (score!=999) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter a score:");
+		double score=0;                       //each test grade
+		double total=0;                       //sum of all entered grades
+		int count=0;                          //count of grades entered
+		int remaining=10;                        //count of grades to be entered  
+		double[] scores= new double[10];      //array of grades entered
+//		TestAvgCalc.specs();                  //calling the method to print specifications		
+		System.out.println("Welcome to Test Average Calculator.\n\nYou may enter up to 10 scores,\nor enter 999 at anytime to quit.\n\nPlease enter your first test grade:");
+		
+		Scanner sc = new Scanner(System.in);  //initialize an instance of the Scanner class
+		score = sc.nextDouble();              //call the nextDouble method to read the input 
+		
+		if (score!=999) {
+			scores[count] = score;
+			total=total+score;
+			count++;
+			remaining = 10 - count;
+		}
+		while (score!=999 & count<10) {
+			
+			
+			
+			System.out.println("\nYou have " + remaining + " scores remaining.\n\nPlease enter your next test grade or 999 to quit:");
 			score = sc.nextDouble();
-			if (score == 999) {
-				System.out.println("Program terminated.");
-				break;
+			if (score!=999) {
+				scores[count] = score;
+				total=total+score;
+				count++;
+				remaining = 10 - count;
 			}
-			System.out.println(score);
-		};
+			
+		}
+		System.out.println("End of Program.");
+		System.out.println(Arrays.toString(scores));
+		System.out.println("Total: " + total);
+		System.out.println("Count: " + count);
 	}
 }
